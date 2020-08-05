@@ -27,55 +27,59 @@ class App extends Component {
   //   countTotalFeedback = () => {
   //     return this.state.good + this.state.neutral + this.state.bad;
   //   };
-  // OR
+  // the same, but shortest
   countTotalFeedback = () =>
     this.state.good + this.state.neutral + this.state.bad;
 
-  countPositiveFeedbackPercentage = () => {
-    const positive = this.state.good;
-    const total = this.countTotalFeedback();
-    return total === 0 ? 0 : Math.floor((positive / total) * 100);
-  };
+  // countPositiveFeedbackPercentage = () => {
+  //   const positiveFeedback = this.state.good;
+  //   const total = this.countTotalFeedback();
+  //   return total === 0 ? 0 : Math.floor((positiveFeedback / total) * 100);
+  // };
+  //OR shortest variant
+  countPositiveFeedbackPercentage = () =>
+    Math.floor((this.state.good / this.countTotalFeedback()) * 100);
 
   feedbackCounter = value => {
-    // const value = event.target.name;
     this.setState(prevState => ({
       [value]: prevState[value] + 1,
     }));
   };
 
-  percentageCounter = value => {
-    this.feedbackCounter(value);
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-  };
+  // feedbackAndPercentageCounter = value => {
+  //   this.feedbackCounter(value);
+  //   this.countTotalFeedback();
+  //   this.countPositiveFeedbackPercentage();
+  // };
 
   render() {
     const total = this.countTotalFeedback();
-    const positivePersentage = this.countPositiveFeedbackPercentage();
-    // const options = Object.keys(this.state);
+    const positivePercentage = this.countPositiveFeedbackPercentage();
+    // const options = Object.keys(this.state); - can use it for destructuring
 
     return (
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
-            onLeaveFeedback={this.percentageCounter}
+            onLeaveFeedback={this.feedbackCounter}
+            //OR try this (if forget what we count :))
+            // onLeaveFeedback={this.feedbackAndPercentageCounter}
           />
         </Section>
-        {total > 0 ? (
-          <Section title="Statistics:">
+        <Section title="Statistics">
+          {total > 0 ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
               total={total}
-              positivePersentage={positivePersentage}
+              positivePercentage={positivePercentage}
             />
-          </Section>
-        ) : (
-          <NotificationMsg msg={'No feedback given'} />
-        )}
+          ) : (
+            <NotificationMsg msg={'No feedback given'} />
+          )}
+        </Section>
       </>
     );
   }

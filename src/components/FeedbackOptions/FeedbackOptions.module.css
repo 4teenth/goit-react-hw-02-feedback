@@ -1,0 +1,18 @@
+.fdbkBtn {
+  display: inline-block;
+  cursor: pointer;
+  background: white;
+  line-height: 20px;
+  border: 1px solid darkgray;
+  outline: none;
+  border-radius: 10px;
+  margin: 0 3px 0 3px;
+}
+
+.fdbkBtn:hover {
+  background: whitesmoke;
+}
+
+.fdbkBtn:active {
+  background: #00a9ff;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import StatisticItem from './StatisticItem';
 import PropTypes from 'prop-types';
 
-const Statistics = ({ good, neutral, bad, total, positivePersentage }) => (
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
   <>
     <ul>
       <StatisticItem label="Good" value={good} />
@@ -11,7 +11,7 @@ const Statistics = ({ good, neutral, bad, total, positivePersentage }) => (
       <StatisticItem label="Total" value={total} />
       <StatisticItem
         label="Positive feedback"
-        value={`${positivePersentage}%`}
+        value={`${positivePercentage}%`}
       />
     </ul>
   </>
